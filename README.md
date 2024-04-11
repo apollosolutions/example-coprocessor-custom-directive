@@ -1,6 +1,6 @@
-# Coprocessor "Hello World"
+# Coprocessor with custom auth directive
 
-This repository demonstrates how to setup a skeleton coprocessor that simply logs the `payload` from the Router.
+This repository demonstrates how to setup a JS coprocessor that applies some custom auth checks.
 
 ## Running the Example
 
@@ -18,6 +18,12 @@ Now if you run this code in the browser (http://127.0.0.1:4000/), you will be ab
 
 ### Coprocessor Configuration
 
-In `router/router-config.yaml`, the coprocessor is configured with the Router to be called on the `router` `request` stage.
+In `router/router-config.yaml`, the coprocessor is configured with the Router to be called on the `SupergraphRequest` stage so that Router handles basic GraphQL validation.
 
 ### Coprocessor
+
+Implemented with JS to parse the schema and operations on every request and execute it against a mock schema.
+
+The `auth.js` file implements the authNZ directive logic as if it was on a real GraphQL server. See comments for more details.
+
+Send requests with the `x-user-role: ADMIN` header to test operations that require auth.
