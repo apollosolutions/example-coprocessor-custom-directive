@@ -1,9 +1,14 @@
 schema
   @link(url: "https://specs.apollo.dev/link/v1.0")
   @link(url: "https://specs.apollo.dev/join/v0.3", for: EXECUTION)
+  @link(url: "https://myspecs.dev/authDirectives/v1.0", import: ["@authenticated", "@hasRole"])
 {
   query: Query
 }
+
+directive @authenticated repeatable on OBJECT | FIELD_DEFINITION
+
+directive @hasRole(requires: Role = ADMIN) on OBJECT | FIELD_DEFINITION
 
 directive @join__enumValue(graph: join__Graph!) repeatable on ENUM_VALUE
 
@@ -43,4 +48,15 @@ type Query
   @join__type(graph: SUBGRAPH)
 {
   hello: String
+  helloAuthN: String @authenticated
+  helloAuthZ: String @hasRole(requires: USER)
+}
+
+enum Role
+  @join__type(graph: SUBGRAPH)
+{
+  ADMIN @join__enumValue(graph: SUBGRAPH)
+  PARTNER @join__enumValue(graph: SUBGRAPH)
+  USER @join__enumValue(graph: SUBGRAPH)
+  UNKNOWN @join__enumValue(graph: SUBGRAPH)
 }

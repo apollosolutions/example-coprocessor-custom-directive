@@ -1,7 +1,13 @@
 const resolvers = {
   Query: {
     hello: () => {
-      return "Hello World!";
+      return "Hello World basic!";
+    },
+    helloAuthN: () => {
+      return "Hello World authn!";
+    },
+    helloAuthZ: () => {
+      return "Hello World authz!";
     },
   },
 };

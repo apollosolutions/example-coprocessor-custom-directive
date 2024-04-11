@@ -1,7 +1,12 @@
 # $schema: configuration_schema.json
 
+supergraph:
+  listen: 127.0.0.1:4000
+
 coprocessor:
   url: http://localhost:3007
-  router:
+  supergraph:
     request:
       headers: true
+      sdl: true
+      body: true
