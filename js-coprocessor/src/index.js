@@ -42,13 +42,13 @@ const processSupergraphRequestStage = async (payload) => {
 // Parse the schema and hash it, so we don't reparse if it hasn't changed
 const getSchemaObject = (sdl) => {
   const sdlHash = crypto.createHash('sha256').update(sdl).digest('hex');
-  console.log("Schema hash:", sdlHash);
+  //console.log("Schema hash:", sdlHash);
 
   if (sdlHash === cachedSchemaHash) {
     return cachedSchema;
   }
 
-  console.log(`New schema, storing in memory...`)
+  //console.log(`New schema, storing in memory...`)
   cachedSchemaHash = sdlHash;
   const newSchema = buildSchema(sdl);
   const mockedSchema = addMocksToSchema({schema: newSchema});
