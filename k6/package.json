@@ -1,0 +1,14 @@
+{
+  "name": "k6",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test.js",
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "loadtest": "docker run --network=\"host\" --rm -i grafana/k6 run - <test.js"
+  },
+  "devDependencies": {
+  }
+}
