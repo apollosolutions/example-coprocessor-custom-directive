@@ -48,7 +48,7 @@ const getSchemaTransformer = (isAuthenticatedFn, getUserPermissionsFn) => {
                     const { resolve = defaultFieldResolver } = fieldConfig;
                     fieldConfig.resolve = function (source, args, context, info) {
                         // The Router passes an array even if there is only 1 value
-                        const contextValue = context.headers[USER_HEADER][0];
+                        const contextValue = context.headers?.[USER_HEADER]?.[0];
 
                         // Check if the field requires authentication
                         if (authNDirective && !isAuthenticatedFn(contextValue)) {
