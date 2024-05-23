@@ -2,6 +2,14 @@
 
 This repository demonstrates how to setup a JS coprocessor that applies some custom auth checks.
 
+## Disclaimer
+**The code in this repository is experimental and has been provided for reference purposes only. Community feedback is welcome but this project may not be supported in the same way that repositories in the official [Apollo GraphQL GitHub organization](https://github.com/apollographql) are. If you need help you can file an issue on this repository, [contact Apollo](https://www.apollographql.com/contact-sales) to talk to an expert, or create a ticket directly in Apollo Studio.**
+
+## Architecture and recomendations
+This is an example of how you can use custom directives to do very unique and complicated logic with a coprocessor. It is **not** required or reccommend for custom auth solutions. Apollo Router supports custom auth providers still using the [`@requiresScopes` and `@policy` directives](https://www.apollographql.com/docs/router/configuration/authorization/#authorization-directives), and we reccomend you use those.
+
+This example uses `@composeDirective` to add our custom directives to the supergraph. The entire SDL is then sent to a coprocessor where it is parsed, mocked, and cached with graphql-js as a full GraphQL schema. On every request we then "execute" the operation against our mock schema that has the custom directive implementation code and runs our auth logic and we return an auth error or continue based on the response.
+
 ## Running the Example
 
 > Note: To run this example, you will need a GraphOS Enterprise plan and must create `/router/.env` based on `/router/.env.example` which exports `APOLLO_KEY` and `APOLLO_GRAPH_REF`.
